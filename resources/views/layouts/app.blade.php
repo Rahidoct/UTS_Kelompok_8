@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>UTS GITS.ID</title>
+    <title>Pusat Belanja</title>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -23,7 +23,7 @@
         <nav class="navbar navbar-expand-md navbar-light bg-primary shadow-sm">
             <div class="container">
                 <a class="navbar-brand text-white" href="{{ url('/') }}">
-                    UTS GITS.ID
+                    Pusat Belanja
                 </a>
                 <button class="navbar-toggler bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -31,12 +31,22 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav me-auto">
-
+                    <ul class="navbar-nav me-auto justify-content-end">
+                        <!-- Navbar links -->
                     </ul>
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto text-white">
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="{{ route('categories.index') }}">Kategori</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="{{ route('products.index') }}">Produk</a>
+                        </li>
+                        {{-- 
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="{{ route('carts.index') }}">Keranjang</a>
+                        </li> --}}
                         <!-- Authentication Links -->
                         @guest
                             @if (Route::has('login'))
