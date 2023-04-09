@@ -31,7 +31,7 @@ class HomeController extends Controller
     }
     public function showProductsByCategory($categoryId)
     {
-        $category = category::find($categoryId)->get();
+        $category = category::find($categoryId);
 
         if (!$category) {
             throw new \Exception('Kategori tidak ditemukan');

@@ -20,7 +20,7 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-primary shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-light bg-primary shadow-sm sticky-top">
             <div class="container">
                 <a class="navbar-brand text-white" href="{{ url('/') }}">
                     Pusat Belanja

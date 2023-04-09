@@ -38,7 +38,7 @@
                                             <h5 class="card-title">{{ $product->name }}</h5>
                                             <p class="card-text">{{ $product->description }}</p>
                                             <div class="d-flex justify-content-between align-items-center">
-                                                <span class="h5 mb-0">Rp {{ number_format($product->price) }}</span>
+                                                <span class="h6 mb-0">Rp. {{ number_format($product->price) }}</span>
                                                 <div class="btn-group">
                                                     <button type="button" class="btn btn-sm btn-outline-primary">Add to cart</button>
                                                     <a href="#" class="btn btn-sm btn-outline-success">Buy now</a>
