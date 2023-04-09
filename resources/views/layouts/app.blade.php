@@ -37,6 +37,9 @@
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto text-white">
+                        <li class="nav-item active">
+                            <a href="{{ url('/home') }}" class="nav-link text-white">Home</a>
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link text-white" href="{{ route('categories.index') }}">Kategori</a>
                         </li>
@@ -61,6 +64,7 @@
                                 </li>
                             @endif
                         @else
+                            <div class="vr"></div>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link text-white dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}
