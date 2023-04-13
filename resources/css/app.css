@@ -1,0 +1,22 @@
+.cart-sidebar {
+    position: fixed;
+    top: 70px;
+    right: 0;
+    width: 300px;
+    height: 100%;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    padding: 20px;
+    overflow-y: scroll;
+}
+
+@media (max-width: 991.98px) {
+    .cart-sidebar {
+        width: 100%;
+        height: auto;
+        bottom: 0;
+        top: unset;
+        box-shadow: none;
+        padding: 0;
+    }
+}

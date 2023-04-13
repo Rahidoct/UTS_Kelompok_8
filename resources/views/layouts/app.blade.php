@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
@@ -38,24 +39,19 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto text-white">
                         <li class="nav-item active">
-                            <a href="{{ url('/home') }}" class="nav-link text-white">Home</a>
+                            <a href="{{ url('/') }}" class="nav-link text-white">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white" href="{{ route('categories.index') }}">Kategori</a>
+                            <a class="nav-link text-white" href="{{ route('carts.index') }}">Cart 
+                                {{-- <span class="badge badge-pill badge-success">{{ $cartCount }}</span> --}}
+                            </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white" href="{{ route('products.index') }}">Produk</a>
-                        </li>
-                        {{-- 
-                        <li class="nav-item">
-                            <a class="nav-link text-white" href="{{ route('carts.index') }}">Keranjang</a>
-                        </li> --}}
                         <!-- Authentication Links -->
                         @guest
                             @if (Route::has('login'))
-                                <li class="nav-item">
+                                {{-- <li class="nav-item">
                                     <a class="nav-link text-white" href="{{ route('login') }}">{{ __('Login') }}</a>
-                                </li>
+                                </li> --}}
                             @endif
 
                             @if (Route::has('register'))
@@ -71,16 +67,30 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item"> 
+                                        {{-- href="{{ route('profile') }}" --}}
+                                        {{ __('Profile') }}
+                                    </a>
+                                    <a class="dropdown-item"> 
+                                        {{-- href="{{ route('transactions') }}" --}}
+                                        {{ __('Transactions') }}
+                                    </a>
+                                    <div class="dropdown-divider"></div> <!-- Ini adalah garis pemisah menu dropdown -->
+                                    <a class="dropdown-item" href="{{ route('categories.index') }}">
+                                        {{ __('Categories') }}
+                                    </a>
+                                    <a class="dropdown-item" href="{{ route('products.index') }}">
+                                        {{ __('Products') }}
+                                    </a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
-                                    onclick="event.preventDefault();
-                                                    document.getElementById('logout-form').submit();">
+                                        onclick="event.preventDefault();
+                                        document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
-
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
                                     </form>
-                                </div>
+                                </div>                                
                             </li>                                       
                         @endguest
                         
@@ -93,5 +103,33 @@
             @yield('content')
         </main>
     </div>
+    <script>
+        $(document).ready(function() {
+            $('.btn-number').click(function(e) {
+                e.preventDefault();
+    
+                var fieldName = $(this).attr('data-field');
+                var type = $(this).attr('data-type');
+                var input = $("input[name='" + fieldName + "']");
+                var currentVal = parseInt(input.val());
+    
+                if (!isNaN(currentVal)) {
+                    if (type == 'minus') {
+                        if (currentVal > input.attr('min')) {
+                            input.val(currentVal - 1).change();
+                        }
+                    } else if (type == 'plus') {
+                        if (currentVal < input.attr('max')) {
+                            input.val(currentVal + 1).change();
+                        }
+                    }
+                }
+            });
+    
+            $('.input-number').change(function() {
+                $('#update-form').submit();
+            });
+        });
+    </script>
 </body>
 </html>

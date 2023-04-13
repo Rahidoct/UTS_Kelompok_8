@@ -32,22 +32,24 @@
                                 @endif
                                 <div class="col-md-4">
                                     <div class="card mb-4">
-                                        <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" class="card-img-top" width="200px" height="200px"
-                                        object-fit="cover">
+                                        <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" class="card-img-top" width="200px" height="200px" object-fit="cover">
                                         <div class="card-body">
                                             <h5 class="card-title">{{ $product->name }}</h5>
                                             <p class="card-text">{{ $product->description }}</p>
                                             <div class="d-flex justify-content-between align-items-center">
                                                 <span class="h6 mb-0">Rp. {{ number_format($product->price) }}</span>
-                                                <div class="btn-group">
-                                                    <button type="button" class="btn btn-sm btn-outline-primary">Add to cart</button>
-                                                    <a href="#" class="btn btn-sm btn-outline-success">Buy now</a>
-                                                </div>
+                                                <form action="{{ route('addToCart') }}" method="POST">
+                                                    @csrf
+                                                    <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                                    <div class="btn-group">
+                                                        <button type="submit" class="btn btn-sm btn-outline-primary">Add Cart</button>
+                                                        <a href="#" class="btn btn-sm btn-outline-success">Buy now</a>
+                                                    </div>
+                                                </form>                                                
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                
+                                </div>                                
                                 @if(($index + 1) % 3 == 0 || $loop->last)
                                     </div>
                                 @endif

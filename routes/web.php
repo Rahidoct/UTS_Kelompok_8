@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\cartController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\productController;
 use App\Http\Controllers\categoryController;
@@ -17,13 +18,22 @@ use App\Http\Controllers\categoryController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Auth::routes();
 
-Route::get('/home', [HomeController::class, 'index'])->name('home');
-Route::get('/products/category/{categoryId}', [HomeController::class, 'showProductsByCategory']);
-Route::resource('categories', categoryController::class);
-Route::resource('products', productController::class);
+Route::middleware(['auth'])->group(function () {
+  Route::get('/', [HomeController::class, 'index'])->name('beranda');
+  Route::get('/products/category/{categoryId}', [HomeController::class, 'showProductsByCategory']);
+  Route::resource('categories', categoryController::class);
+  Route::resource('products', productController::class);
+  // Route::get('/products/{id}', [productController::class, 'show'])->name('products.show');
+  Route::get('/cart', [cartController::class, 'index'])->name('carts.index');
+  Route::post('/cart/add', [cartController::class, 'addToCart'])->name('addToCart');
+  Route::put('/carts/{cart}', [cartController::class, 'update'])->name('carts.update');
+  Route::delete('/carts/{cart}', [cartController::class, 'destroy'])->name('carts.destroy');
+
+});
+
