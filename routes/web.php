@@ -29,11 +29,9 @@ Route::middleware(['auth'])->group(function () {
   Route::get('/products/category/{categoryId}', [HomeController::class, 'showProductsByCategory']);
   Route::resource('categories', categoryController::class);
   Route::resource('products', productController::class);
-  // Route::get('/products/{id}', [productController::class, 'show'])->name('products.show');
   Route::get('/cart', [cartController::class, 'index'])->name('carts.index');
   Route::post('/cart/add', [cartController::class, 'addToCart'])->name('addToCart');
   Route::put('/carts/{cart}', [cartController::class, 'update'])->name('carts.update');
   Route::delete('/carts/{cart}', [cartController::class, 'destroy'])->name('carts.destroy');
 
 });
-
