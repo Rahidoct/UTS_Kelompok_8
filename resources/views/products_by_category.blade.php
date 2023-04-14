@@ -43,7 +43,7 @@
                                                     <input type="hidden" name="product_id" value="{{ $product->id }}">
                                                     <div class="btn-group">
                                                         <button type="submit" class="btn btn-sm btn-outline-primary">Add Cart</button>
-                                                        <a href="#" class="btn btn-sm btn-outline-success">Buy now</a>
+                                                        <button type="submit" class="btn btn-sm btn-outline-success" formaction="{{ route('buyNow') }}">Buy now</button>
                                                     </div>
                                                 </form>                                                
                                             </div>

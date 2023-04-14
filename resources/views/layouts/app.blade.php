@@ -43,7 +43,7 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-white" href="{{ route('carts.index') }}">Cart 
-                                <span class="badge badge-pill badge-success">{{ $cartCount }}</span>
+                                <span class="badge badge-pill bg-success">{{ $cartCount }}</span>
                             </a>
                         </li>
                         <!-- Authentication Links -->
