@@ -23,7 +23,6 @@ class BuyNowController extends Controller
         ]);
 
         // Memanggil controller TransactionDetailController untuk membuat data transaksi detail
-        $product = product::find($request->product_id);
         $requestDetail = new Request([
             'transaction_id' => $transaction->id,
             'product_id' => $product->id,

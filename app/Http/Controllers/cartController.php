@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\cart;
+use App\Models\product;
+use App\Models\transaction;
+use Illuminate\Http\Request;
+use App\Models\transactionDetail;
 use Illuminate\Support\Facades\DB;
 
 class CartController extends Controller
@@ -14,13 +17,51 @@ class CartController extends Controller
             'product_id' => 'required|exists:products,id',
         ]);
 
-        $cart = new Cart;
+        $cart = new cart;
         $cart->product_id = $validatedData['product_id'];
         $cart->quantity = 1; // default quantity is 1
         $cart->save();
 
         return back()->with('success', 'Product added to cart successfully.');
     }
+
+    public function checkout()
+    {
+        $carts = cart::all();
+        // Mendapatkan data produk yang dibeli
+        $product = product::all();
+
+        // Membuat transaksi baru
+        $transaction = transaction::create([
+            'date' => date('Y-m-d H:i:s'),
+            'status' => 'success',
+        ]);
+
+        // Menyimpan detail transaksi
+        foreach (cart::all() as $cart) {
+            transactionDetail::create([
+                'transaction_id' => $transaction->id,
+                'product_id' => $cart->product_id,
+                'quantity' => $cart->quantity,
+                'price' => $cart->product->price,
+            ]);
+        }
+
+        // Menghitung harga total dari semua item di keranjang belanja
+        $total = cart::all()->sum(function ($cart) {
+            return $cart->product->price * $cart->quantity;
+        });
+
+        // Menghapus semua item di keranjang belanja
+        cart::destroy(cart::pluck('id')->toArray());
+
+        // Mengambil data detail transaksi yang baru dibuat
+        $transactionDetails = transactionDetail::where('transaction_id', $transaction->id)->get();
+
+        // Mengirimkan data detail transaksi ke halaman invoice
+        return view('carts.invoice', compact('transactionDetails'));
+    }
+
     public function index()
     {
         $cartItems = cart::getCartItems();

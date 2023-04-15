@@ -47,17 +47,13 @@
             <div class="col-sm-6">
                 <a href="{{ url('/') }}" class="btn btn-primary">Continue Shopping</a>
             </div>
-            <div class="col-sm-6 text-right">
-                <h2>Total: {{ $carts->sum(function($cart) { return $cart->product->price * $cart->quantity; }) }}</h2>
-                <a href="#" class="btn btn-success">Checkout</a>
-            </div>
-            {{-- <div class="col-md-6 text-right">
+            <div class="col-md-6 text-end">
                 <h2>Total: {{ $carts->sum(function($cart) { return $cart->product->price * $cart->quantity; }) }}</h2>
                 <form method="POST" action="{{ route('checkout') }}">
                     @csrf
                     <button type="submit" class="btn btn-success">Checkout</button>
                 </form>
-            </div> --}}
+            </div>
         </div>
     </div>
 @endsection

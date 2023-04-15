@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\cart;
 use App\Models\transaction;
 use Illuminate\Http\Request;
 use App\Models\transactionDetail;

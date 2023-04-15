@@ -91,7 +91,7 @@
 		<div class="row justify-content-center">
 			<div class="col-md-8">
 				<div class="invoice-box">
-					<h1>Invoice</h1>
+					<h1>Invoice Checkout</h1>
 					<hr>
 					<table>
 						<thead>
@@ -105,14 +105,14 @@
 							</tr>
 						</thead>
 						<tbody>
-							@foreach($transaction_details as $transaction)
+							@foreach($transactionDetails as $transactionDetail)
 								<tr>
-									<td>{{ $transaction->transaction->date }}</td>
-									<td>{{ $transaction->transaction->status }}</td>
-									<td>{{ $transaction->product->name }}</td>
-									<td>{{ $transaction->quantity }}</td>
-									<td>{{ $transaction->product->price }}</td>
-									<td>{{ $transaction->quantity * $transaction->product->price }}</td>
+									<td>{{ $transactionDetail->transaction->date }}</td>
+									<td>{{ $transactionDetail->transaction->status }}</td>
+									<td>{{ $transactionDetail->product->name }}</td>
+									<td>{{ $transactionDetail->quantity }}</td>
+									<td>{{ $transactionDetail->product->price }}</td>
+									<td>{{ $transactionDetail->product->price * $transactionDetail->quantity }}</td>
 								</tr>
 							@endforeach
 						</tbody>
@@ -120,8 +120,8 @@
 					<div class="total">
 						<?php
 							$total = 0;
-							foreach($transaction_details as $transaction) {
-								$subtotal = $transaction->quantity * $transaction->product->price;
+							foreach($transactionDetails as $transactionDetail) {
+								$subtotal = $transactionDetail->quantity * $transactionDetail->product->price;
 								$total += $subtotal;
 							}
 							echo '<strong>Total :</strong> Rp. '.number_format($total, 0, ',', '.');
@@ -130,7 +130,7 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	</div>	
 	<script>
 		window.onload = function() {
 			window.print();

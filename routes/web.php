@@ -7,6 +7,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\BuyNowController;
 use App\Http\Controllers\productController;
 use App\Http\Controllers\categoryController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\TransactionController;
 
 /*
@@ -35,7 +36,7 @@ Route::middleware(['auth'])->group(function () {
   Route::post('/cart/add', [cartController::class, 'addToCart'])->name('addToCart');
   Route::put('/carts/{cart}', [cartController::class, 'update'])->name('carts.update');
   Route::delete('/carts/{cart}', [cartController::class, 'destroy'])->name('carts.destroy');
-  // Route::post('/checkout', 'CheckoutController@checkout')->name('checkout');
+  Route::post('/checkout', [CartController::class, 'checkout'])->name('checkout');
   Route::post('/buy-now', [BuyNowController::class, 'buyNow'])->name('buyNow');
   Route::get('/invoice/{transaction_id}', [TransactionController::class, 'showInvoice'])->name('invoice');
   Route::get('/transactions', [TransactionController::class, 'transaction'])->name('transactions');

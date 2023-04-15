@@ -15,7 +15,7 @@ class transaction extends Model
         'status'
     ];
 
-    public function transactionDetails()
+    public function transaction_details()
     {
         return $this->hasMany(transactionDetail::class);
     }

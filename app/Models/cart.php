@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use App\Models\product;
+use App\Models\transaction;
+use App\Models\transactionDetail;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -35,6 +37,16 @@ class cart extends Model
     public static function getCartItems()
     {
         return cart::with('product')->get();
+    }
+
+    public function transaction()
+    {
+        return $this->belongsTo(transaction::class);
+    }
+
+    public function transaction_detail()
+    {
+        return $this->belongsTo(transactionDetail::class);
     }
 
 }
