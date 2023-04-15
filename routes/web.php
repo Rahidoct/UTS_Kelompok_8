@@ -39,6 +39,5 @@ Route::middleware(['auth'])->group(function () {
   Route::post('/checkout', [CartController::class, 'checkout'])->name('checkout');
   Route::post('/buy-now', [BuyNowController::class, 'buyNow'])->name('buyNow');
   Route::get('/invoice/{transaction_id}', [TransactionController::class, 'showInvoice'])->name('invoice');
-  Route::get('/transactions', [TransactionController::class, 'transaction'])->name('transactions');
-
+  Route::get('/transactions', [TransactionController::class, 'index'])->name('transactions');
 });

@@ -44,5 +44,15 @@ class TransactionController extends Controller
 
         return $transaction;
     }
+
+    public function history()
+    {
+        // Mengambil data transaksi dari database, dengan diurutkan berdasarkan tanggal secara menurun
+        $transactions = Transaction::orderBy('date', 'status')->get();
+
+        // Menampilkan halaman view "history" dan mengirim data transaksi ke dalam view
+        return view('trasaction', ['transactions' => $transactions]);
+    }
+
 }
 

@@ -71,10 +71,9 @@
                                         {{-- href="{{ route('profile') }}" --}}
                                         {{ __('Profile') }}
                                     </a>
-                                    <a class="dropdown-item"> 
-                                        {{-- href="{{ route('transactions') }}" --}}
+                                    <a class="dropdown-item" href="{{ route('transactions') }}">
                                         {{ __('Transactions') }}
-                                    </a>
+                                    </a>                                    
                                     <div class="dropdown-divider"></div> <!-- Ini adalah garis pemisah menu dropdown -->
                                     <a class="dropdown-item" href="{{ route('categories.index') }}">
                                         {{ __('Categories') }}
