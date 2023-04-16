@@ -10,7 +10,7 @@
                         <ul class="list-group">
                             @foreach($categories as $kategori)
                                 <li class="list-group-item">
-                                    <a href="{{ url('/products/category/'.$kategori->id) }}">
+                                    <a href="{{ url('/products/category/'.$kategori->id) }}" class="text-decoration-none text-primary fw-bold">
                                         {{ $kategori->name }}
                                     </a>
                                 </li>
@@ -21,7 +21,7 @@
             </div>
             <div class="col-md-8 m-3">
                 <div class="row">
-                    <div class="h4 pb-2 mb-4 text-primary border-bottom border-primary">
+                    <div class="h4 pb-2 mb-4 text-primary border-bottom border-primary fw-bold">
                         {{ $category->name }}
                     </div>
                     <div class="card-body">

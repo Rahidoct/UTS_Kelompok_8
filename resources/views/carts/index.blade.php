@@ -1,9 +1,8 @@
-<!-- resources/views/carts/index.blade.php -->
 @extends('layouts.app')
 
 @section('content')
     <div class="container-fluid">
-        <h1>Shopping Cart</h1>
+        <h1 class="my-4">Shopping Cart</h1>
         <div class="table-responsive">
             <table class="table table-striped">
                 <thead>
@@ -25,17 +24,21 @@
                                 <form action="{{ route('carts.update', $cart->id) }}" method="POST">
                                     @csrf
                                     @method('PUT')
-                                    <input type="number" name="quantity" value="{{ $cart->quantity }}" min="1" max="{{ $cart->product->stock }}">
-                                    <button type="submit" class="btn btn-primary btn-sm">Update</button>
-                                </form>
-                            </td>
-                            <td>{{ $cart->product->price }}</td>
-                            <td>{{ $cart->product->price * $cart->quantity }}</td>
+                                    <div class="input-group">
+                                        <button type="submit" class="input-group-text btn btn-outline-danger" id="minus-btn"><i class="fas fa-minus"></i></button>
+                                        <input type="number" name="quantity" value="{{ $cart->quantity }}" class="form-control-sm text-center" min="1" max="{{ $cart->product->stock }}">
+                                        <button type="submit" class="input-group-text btn btn-outline-success" id="plus-btn"><i class="fas fa-plus"></i></button>
+                                    </div>
+                                </form>                                
+                            </td>                            
+                                                        
+                            <td>Rp. {{ $cart->product->price }}</td>
+                            <td>Rp. {{ $cart->product->price * $cart->quantity }}</td>
                             <td>
                                 <form action="{{ route('carts.destroy', $cart->id) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-danger btn-sm">Remove</button>
+                                    <button type="submit" class="btn btn-danger">Remove</button>
                                 </form>
                             </td>
                         </tr>
@@ -47,8 +50,8 @@
             <div class="col-sm-6">
                 <a href="{{ url('/') }}" class="btn btn-primary">Continue Shopping</a>
             </div>
-            <div class="col-md-6 text-end">
-                <h2>Total: {{ $carts->sum(function($cart) { return $cart->product->price * $cart->quantity; }) }}</h2>
+            <div class="col-sm-6 text-end">
+                <h2>Total: Rp. {{ $carts->sum(function($cart) { return $cart->product->price * $cart->quantity; }) }},-</h2>
                 <form method="POST" action="{{ route('checkout') }}">
                     @csrf
                     <button type="submit" class="btn btn-success">Checkout</button>
